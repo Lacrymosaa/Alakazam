@@ -76,7 +76,7 @@ class ChatbotWindow(QMainWindow):
 
 def run_chatbot():
     app = QApplication(sys.argv)
-    app.setStyleSheet("QMainWindow { background-color: #EEEAAA; }")  # Substitua pelo caminho da sua imagem
+    app.setStyleSheet("QMainWindow { background-color: #EEEAAA; }")
     window = ChatbotWindow()
     window.show()
     sys.exit(app.exec_())
