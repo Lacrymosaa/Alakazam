@@ -1,0 +1,11 @@
+Para utilizar o Alakazam será necessário trocar os arquivos "key" e "prompt"
+
+A Key, trata-se da chave OpenAi que você terá que gerar. Passo a Passo:
+- Acesse o site da OpenAI em https://openai.com/
+- Faça o Login normalmente e selecione API
+- No canto superior direito terá seu ícone e ao lado escrito "personal", clique e vá em "View API Keys"
+- Na janela terá o botão "Create new secret key", onde você ira colocar o nome para identificar aonde a chave é usada.
+- Copie e código e cole em key.txt
+
+O Prompt trata-se da persona adereçada ao Alakazam. Para entender como fazer essa persona, recomendo:
+https://github.com/f/awesome-chatgpt-prompts

@@ -4,16 +4,23 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLa
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 
-openai.api_key = "sua chave do OpenAI"
+def read_api_key_from_file():
+    with open("key.txt", "r") as file:
+        api_key = file.read().strip()
+        return api_key
 
-messages = [
-    {
-        "role": "system",
-        "content": "A persona do seu chat."
-    }
-]
+api_key = read_api_key_from_file()
+openai.api_key = api_key
 
-class ChatbotWindow(QMainWindow):
+def read_prompt():
+    with open("prompt.txt", "r") as file:
+        content = file.read()
+        messages = [{"role": "system", "content": content}]
+        return messages
+
+messages = read_prompt()
+
+class Alakazam(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Alakazam GPT")
@@ -53,7 +60,7 @@ class ChatbotWindow(QMainWindow):
 
         self.submit_button.clicked.connect(self.submit_question)
 
-    def CustomChatGPT(self, user_input):
+    def Custom(self, user_input):
         messages.append({"role": "user", "content": user_input})
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -65,7 +72,7 @@ class ChatbotWindow(QMainWindow):
 
     def submit_question(self):
         question = self.question_textedit.toPlainText()
-        answer = self.CustomChatGPT(question)
+        answer = self.Custom(question)
         self.answer_textedit.setPlainText(answer)
 
     def keyPressEvent(self, event):
@@ -74,11 +81,11 @@ class ChatbotWindow(QMainWindow):
         else:
             super().keyPressEvent(event)
 
-def run_chatbot():
+def main():
     app = QApplication(sys.argv)
-    app.setStyleSheet("QMainWindow { background-color: #EEEAAA; }")
-    window = ChatbotWindow()
+    app.setStyleSheet("QMainWindow { background-color: #EEEAAA; }")  # Substitua pelo caminho da sua imagem
+    window = Alakazam()
     window.show()
     sys.exit(app.exec_())
 
-run_chatbot()
+main()
